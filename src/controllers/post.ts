@@ -18,6 +18,6 @@ export const writeOne = async (
       img["key"],
       userEmail
     );
-  await postService.writeOne(req.body as IPostWriteDTO, null, userEmail);
+  else await postService.writeOne(req.body as IPostWriteDTO, null, userEmail);
   res.status(201).end();
 };
