@@ -7,8 +7,8 @@ export const writeOne = async (
   res: Response,
   next: NextFunction
 ) => {
-  const userEmail = req["decoded"].identity;
-  const img = req.file["key"];
+  const userEmail: string = req["decoded"].identity;
+  const img: string = req.file["key"];
   await postService.writeOne(req.body as IPostWriteDTO, img, userEmail);
   res.status(201).end();
 };
