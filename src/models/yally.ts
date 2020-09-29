@@ -19,6 +19,6 @@ Yally.init(
   },
   {
     sequelize,
-    modelName: "Yally",
+    modelName: "yally",
   }
 );

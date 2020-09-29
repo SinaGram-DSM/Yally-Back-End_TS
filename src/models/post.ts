@@ -1,6 +1,7 @@
 import { sequelize } from "../config/config";
 import Sequelize, { Model } from "sequelize";
 import { Comment } from "./comment";
+import { Hashtag } from "./hashtag";
 
 export class Post extends Model {
   id: string;
@@ -29,9 +30,12 @@ Post.init(
   },
   {
     sequelize,
-    modelName: "Post",
+    modelName: "post",
   }
 );
 
 Post.hasMany(Comment, { foreignKey: "postId", sourceKey: "id" });
 Comment.belongsTo(Post, { foreignKey: "postId" });
+
+Post.hasMany(Hashtag, { foreignKey: "postId", sourceKey: "id" });
+Hashtag.belongsTo(Post, { foreignKey: "postId" });

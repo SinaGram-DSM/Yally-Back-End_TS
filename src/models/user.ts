@@ -37,7 +37,7 @@ User.init(
   },
   {
     sequelize,
-    modelName: "User",
+    modelName: "user",
   }
 );
 
@@ -48,14 +48,14 @@ User.hasMany(Comment, { foreignKey: "userEmail", sourceKey: "email" });
 Comment.belongsTo(User, { foreignKey: "userEmail" });
 
 User.belongsToMany(User, {
-  foreignKey: "listenerId",
+  foreignKey: "listenerEmail",
   as: "Listenings",
-  through: "Listen",
+  through: "listen",
 });
 User.belongsToMany(User, {
-  foreignKey: "listeningId",
+  foreignKey: "listeningEmail",
   as: "Listeners",
-  through: "Listen",
+  through: "listen",
 });
 
 User.hasMany(Yally, { foreignKey: "userEmail", sourceKey: "email" });

@@ -15,6 +15,6 @@ Hashtag.init(
   },
   {
     sequelize,
-    modelName: "Hashtag",
+    modelName: "hashtag",
   }
 );
