@@ -5,21 +5,12 @@ interface handlerFunc {
 }
 
 export class tryCatchMiddleware {
-  static BadRequest = (cb: handlerFunc) => {
+  static Error = (cb: handlerFunc) => {
     return async (req: Request, res: Response, next: NextFunction) => {
       try {
         await cb(req, res, next);
       } catch (e) {
-        res.status(400);
-      }
-    };
-  };
-  static NotFound = (cb: handlerFunc) => {
-    return async (req: Request, res: Response, next: NextFunction) => {
-      try {
-        await cb(req, res, next);
-      } catch (e) {
-        res.status(404);
+        res.status(e.statusCode);
       }
     };
   };
