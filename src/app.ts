@@ -1,4 +1,5 @@
 import express, { Application, Request, Response, NextFunction } from "express";
+import { sequelize } from "./config/config";
 import cors from "cors";
 import morgan from "morgan";
 import router from "./routes";
@@ -11,6 +12,8 @@ const app: Application = express();
 
 app.use(morgan("dev"));
 app.use(cors());
+
+sequelize.sync();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
