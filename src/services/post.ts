@@ -11,14 +11,16 @@ const mkId = async (): Promise<string> => {
 
 export const writeOne = async (
   postWriteDTO: IPostWriteDTO,
-  img: string,
+  img: string | null,
   userEmail: string
 ) => {
   const { sound, content, hashtag } = postWriteDTO;
   const id = await mkId();
   const post = await Post.create({ id, sound, content, img, userEmail });
-  for (let hash of hashtag) {
-    await Hashtag.create({ content: hash, postId: post.id });
+  if (hashtag) {
+    for (let hash of hashtag) {
+      await Hashtag.create({ content: hash, postId: post.id });
+    }
   }
 };
 
