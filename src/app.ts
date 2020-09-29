@@ -2,7 +2,6 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import cors from "cors";
 import morgan from "morgan";
 import router from "./routes";
-import { authMiddleware } from "./middleware/auth";
 import * as dotenv from "dotenv";
 import path from "path";
 
