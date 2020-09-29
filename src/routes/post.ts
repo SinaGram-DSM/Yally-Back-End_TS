@@ -1,8 +1,6 @@
 import { Router } from "express";
-import post from "./post";
+import { tryCatchMiddleware } from "../middlewares/tryCatch";
 
 const router = Router();
-
-router.use("/post");
 
 export default router;
