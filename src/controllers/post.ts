@@ -21,3 +21,24 @@ export const writeOne = async (
   else await postService.writeOne(req.body as IPostWriteDTO, null, userEmail);
   res.status(201).end();
 };
+
+export const detailPost = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const postId: string = req.params.id;
+  const userEmail: string = req["decoded"].identity;
+  const post = await postService.showOne(postId, userEmail);
+  res.status(200).json(post);
+};
+
+export const showComment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const postId: string = req.params.id;
+  const comment = await postService.showComment(postId);
+  res.status(200).json({ comments: comment });
+};

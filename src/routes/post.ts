@@ -13,4 +13,16 @@ router.post(
   tryCatchMiddleware.Error(controller.writeOne)
 );
 
+router.get(
+  "/:id",
+  authMiddleware,
+  tryCatchMiddleware.Error(controller.detailPost)
+);
+
+router.get(
+  "/:id/comment",
+  authMiddleware,
+  tryCatchMiddleware.Error(controller.showComment)
+);
+
 export default router;

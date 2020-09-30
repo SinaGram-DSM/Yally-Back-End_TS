@@ -1,9 +1,7 @@
 import { Post } from "../models/post";
-import { Hashtag } from "../models/hashtag";
 import { User } from "../models/user";
 import { Comment } from "../models/comment";
 import { Yally } from "../models/yally";
-import { fn, col, Op } from "sequelize";
 
 export const getAll = async (
   userEmail: string,
