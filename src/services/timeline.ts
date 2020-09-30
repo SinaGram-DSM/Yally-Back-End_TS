@@ -14,15 +14,7 @@ export const getAll = async (
       subQuery: false,
       order: [["createdAt", "DESC"]],
       where: { userEmail },
-      attributes: [
-        "id",
-        "content",
-        "sound",
-        "img",
-        "createdAt",
-        [fn("COUNT", col("comments.id")), "comment"],
-        [fn("COUNT", col("yallies.userEmail")), "yally"],
-      ],
+      attributes: ["id", "content", "sound", "img", "createdAt"],
       include: [
         {
           model: User,
@@ -30,16 +22,24 @@ export const getAll = async (
         },
         {
           model: Comment,
-          attributes: [],
+          attributes: ["id"],
         },
         {
           model: Yally,
-          attributes: [],
+          attributes: ["userEmail"],
         },
       ],
       offset: 7 * (page - 1),
       limit: 7,
     });
+    for (let post of timeline) {
+      post["dataValues"].isYally = false;
+      post["dataValues"].comment = post["dataValues"].comments.length;
+      post["dataValues"].yally = post["dataValues"].yallies.length;
+      for (let yally of post.yallies) {
+        if (yally.userEmail === userEmail) post["dataValues"].isYally = true;
+      }
+    }
 
     return timeline;
   } catch (e) {
