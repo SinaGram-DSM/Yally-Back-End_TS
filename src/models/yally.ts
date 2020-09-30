@@ -11,10 +11,12 @@ Yally.init(
     postId: {
       type: Sequelize.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     userEmail: {
       type: Sequelize.STRING,
       allowNull: false,
+      primaryKey: true,
     },
   },
   {
