@@ -33,11 +33,11 @@ export const getAll = async (
       limit: 7,
     });
     for (let post of timeline) {
-      post["dataValues"].isYally = false;
       post["dataValues"].comment = post["dataValues"].comments.length;
       post["dataValues"].yally = post["dataValues"].yallies.length;
       for (let yally of post.yallies) {
         if (yally.userEmail === userEmail) post["dataValues"].isYally = true;
+        else post["dataValues"].isYally = false;
       }
     }
 
