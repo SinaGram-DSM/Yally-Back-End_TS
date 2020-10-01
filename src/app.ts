@@ -28,6 +28,4 @@ app.use((err, req: Request, res: Response, next: NextFunction) => {
 
 app.set("jwt-secret", process.env.JWT_SECRET);
 
-app.listen(3000, () => {
-  console.log("server on!");
-});
+app.listen(3000);
