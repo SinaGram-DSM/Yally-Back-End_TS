@@ -49,4 +49,6 @@ export const deleteOne = async (
   next: NextFunction
 ) => {
   const postId: string = req.params.id;
+  await postService.deletePost(postId);
+  res.status(204).end();
 };

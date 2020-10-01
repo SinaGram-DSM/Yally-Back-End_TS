@@ -84,3 +84,11 @@ export const showComment = async (postId: string): Promise<object> => {
     throw e;
   }
 };
+
+export const deletePost = async (postId: string) => {
+  try {
+    await Post.destroy({ where: { postId } });
+  } catch (e) {
+    throw new HttpError(404);
+  }
+};

@@ -25,7 +25,7 @@ Post.init(
       type: Sequelize.STRING(40),
     },
     sound: {
-      type: Sequelize.STRING(40),
+      type: Sequelize.STRING(100),
       allowNull: false,
     },
     createdAt: {

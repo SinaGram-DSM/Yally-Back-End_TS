@@ -32,4 +32,10 @@ router.post(
   tryCatchMiddleware.Error(commentController.writeComment)
 );
 
+router.delete(
+  "/:id",
+  authMiddleware,
+  tryCatchMiddleware.Error(postController.deleteOne)
+);
+
 export default router;
