@@ -10,7 +10,6 @@ export const writeComment = async (
 ) => {
   const userEmail: string = req["decoded"].identity;
   const postId: string = req.params.id;
-  console.log(req.body);
   if (!Object.keys(req.body).length) throw new HttpError(400);
   await commentService.write(req.body as ICommentWriteDTO, userEmail, postId);
   res.status(201).end();
