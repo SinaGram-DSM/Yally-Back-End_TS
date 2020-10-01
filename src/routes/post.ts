@@ -4,6 +4,7 @@ import { authMiddleware } from "../middlewares/auth";
 import { uploadMiddleware } from "../middlewares/upload";
 import * as postController from "../controllers/post";
 import * as commentController from "../controllers/comment";
+import * as yallyController from "../controllers/yally";
 
 const router = Router();
 
@@ -37,6 +38,18 @@ router.delete(
   "/comment/:id",
   authMiddleware,
   tryCatchMiddleware.Error(commentController.deleteComment)
+);
+
+router.post(
+  "/yally",
+  authMiddleware,
+  tryCatchMiddleware.Error(yallyController.addYally)
+);
+
+router.delete(
+  "/yally",
+  authMiddleware,
+  tryCatchMiddleware.Error(yallyController.calcelYally)
 );
 
 router.delete(

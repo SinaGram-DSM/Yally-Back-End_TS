@@ -50,12 +50,12 @@ Comment.belongsTo(User, { foreignKey: "userEmail" });
 User.belongsToMany(User, {
   foreignKey: "listenerEmail",
   as: "Listenings",
-  through: "listen",
+  through: "listens",
 });
 User.belongsToMany(User, {
   foreignKey: "listeningEmail",
   as: "Listeners",
-  through: "listen",
+  through: "listens",
 });
 
 User.hasMany(Yally, { foreignKey: "userEmail", sourceKey: "email" });
