@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from "express";
 import * as commentService from "../services/comment";
-import { ICommentWriteDTO } from "../interfaces/IComment";
-import { HttpError } from "../exception/exception";
 
 export const writeComment = async (
   req: Request,
@@ -16,4 +14,14 @@ export const writeComment = async (
     await commentService.write(sound["key"], content, userEmail, postId);
   else await commentService.write(null, content, userEmail, postId);
   res.status(201).end();
+};
+
+export const deleteComment = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const commentId: string = req.params.id;
+  await commentService.deleteComment(commentId);
+  res.status(204).end();
 };

@@ -39,7 +39,8 @@ export const showComment = async (
   next: NextFunction
 ) => {
   const postId: string = req.params.id;
-  const comment = await postService.showComment(postId);
+  const userEmail: string = req["decoded"].identity;
+  const comment = await postService.showComment(postId, userEmail);
   res.status(200).json({ comments: comment });
 };
 

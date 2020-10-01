@@ -66,20 +66,27 @@ export const showOne = async (
   }
 };
 
-export const showComment = async (postId: string): Promise<object> => {
+export const showComment = async (
+  postId: string,
+  userEmail: string
+): Promise<object> => {
   try {
-    const comment: any = await Comment.findAll({
+    const comments: any = await Comment.findAll({
       where: { postId },
       order: [["createdAt", "DESC"]],
-      attributes: ["content", "sound", "createdAt"],
+      attributes: ["id", "content", "sound", "createdAt"],
       include: [
         {
           model: User,
-          attributes: ["nickname", "img"],
+          attributes: ["email", "nickname", "img"],
         },
       ],
     });
-    return comment;
+    for (let comment of comments) {
+      comment["dataValues"].isMine = false;
+      if (comment.user.email === userEmail) comment["dataValues"].isMine = true;
+    }
+    return comments;
   } catch (e) {
     throw e;
   }

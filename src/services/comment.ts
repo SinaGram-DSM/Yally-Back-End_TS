@@ -18,3 +18,7 @@ export const write = async (
   const id = await mkId();
   await Comment.create({ id, sound, content, postId, userEmail });
 };
+
+export const deleteComment = async (id: string) => {
+  await Comment.destroy({ where: { id } });
+};

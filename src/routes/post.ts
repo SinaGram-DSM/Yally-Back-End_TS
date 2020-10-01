@@ -34,6 +34,12 @@ router.post(
 );
 
 router.delete(
+  "/comment/:id",
+  authMiddleware,
+  tryCatchMiddleware.Error(commentController.deleteComment)
+);
+
+router.delete(
   "/:id",
   authMiddleware,
   tryCatchMiddleware.Error(postController.deleteOne)
