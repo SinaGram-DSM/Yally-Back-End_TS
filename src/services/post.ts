@@ -92,3 +92,18 @@ export const deletePost = async (postId: string) => {
     throw new HttpError(404);
   }
 };
+
+export const updatePost = async (
+  postWriteDTO: IPostWriteDTO,
+  img: string | null,
+  postId: string
+) => {
+  const { sound, content, hashtag } = postWriteDTO;
+  await Post.update({ sound, content, img }, { where: { id: postId } });
+  await Hashtag.destroy({ where: { postId } });
+  if (hashtag) {
+    for (let hash of hashtag) {
+      await Hashtag.create({ content: hash, postId });
+    }
+  }
+};

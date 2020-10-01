@@ -38,4 +38,11 @@ router.delete(
   tryCatchMiddleware.Error(postController.deleteOne)
 );
 
+router.put(
+  "/:id",
+  authMiddleware,
+  uploadMiddleware.single("file"),
+  tryCatchMiddleware.Error(postController.updateOne)
+);
+
 export default router;

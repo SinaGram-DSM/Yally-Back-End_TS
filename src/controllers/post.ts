@@ -52,3 +52,18 @@ export const deleteOne = async (
   await postService.deletePost(postId);
   res.status(204).end();
 };
+
+export const updateOne = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const postId: string = req.params.id;
+  const img: any = req.file;
+  const sound: string = req.body.sound;
+  if (!sound) throw new HttpError(400);
+  if (img)
+    await postService.updatePost(req.body as IPostWriteDTO, img["key"], postId);
+  else await postService.updatePost(req.body as IPostWriteDTO, null, postId);
+  res.status(201).end();
+};
