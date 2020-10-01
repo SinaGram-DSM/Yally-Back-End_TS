@@ -42,3 +42,11 @@ export const showComment = async (
   const comment = await postService.showComment(postId);
   res.status(200).json({ comments: comment });
 };
+
+export const deleteOne = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const postId: string = req.params.id;
+};
