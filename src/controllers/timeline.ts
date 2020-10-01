@@ -8,7 +8,6 @@ export const getTimeline = async (
 ) => {
   const userEmail: string = req["decoded"].identity;
   const page: any = req.params.page;
-  console.log(page);
   const timeline = await getAll(userEmail, page);
   res.status(200).json({ posts: timeline });
 };

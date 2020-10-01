@@ -33,9 +33,12 @@ export const getAll = async (
     for (let post of timeline) {
       post["dataValues"].comment = post["dataValues"].comments.length;
       post["dataValues"].yally = post["dataValues"].yallies.length;
+      post["dataValues"].isYally = false;
+      if (post["dataValues"].user.email === userEmail)
+        post["dataValues"].isMine = true;
+      else post["dataValues"].isMine = false;
       for (let yally of post.yallies) {
         if (yally.userEmail === userEmail) post["dataValues"].isYally = true;
-        else post["dataValues"].isYally = false;
       }
     }
 
