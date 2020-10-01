@@ -2,7 +2,8 @@ import { Router } from "express";
 import { tryCatchMiddleware } from "../middlewares/tryCatch";
 import { authMiddleware } from "../middlewares/auth";
 import { uploadMiddleware } from "../middlewares/upload";
-import * as controller from "../controllers/post";
+import * as postController from "../controllers/post";
+import * as commentController from "../controllers/comment";
 
 const router = Router();
 
@@ -10,19 +11,25 @@ router.post(
   "/",
   authMiddleware,
   uploadMiddleware.single("file"),
-  tryCatchMiddleware.Error(controller.writeOne)
+  tryCatchMiddleware.Error(postController.writeOne)
 );
 
 router.get(
   "/:id",
   authMiddleware,
-  tryCatchMiddleware.Error(controller.detailPost)
+  tryCatchMiddleware.Error(postController.detailPost)
 );
 
 router.get(
   "/:id/comment",
   authMiddleware,
-  tryCatchMiddleware.Error(controller.showComment)
+  tryCatchMiddleware.Error(postController.showComment)
+);
+
+router.post(
+  "/comment/:id",
+  authMiddleware,
+  tryCatchMiddleware.Error(commentController.writeComment)
 );
 
 export default router;
