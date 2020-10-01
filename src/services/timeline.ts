@@ -27,8 +27,8 @@ export const getAll = async (
           attributes: ["userEmail"],
         },
       ],
-      offset: 7 * (page - 1),
-      limit: 7,
+      offset: 5 * (page - 1),
+      limit: 5,
     });
     for (let post of timeline) {
       post["dataValues"].comment = post["dataValues"].comments.length;
