@@ -29,6 +29,7 @@ router.get(
 router.post(
   "/comment/:id",
   authMiddleware,
+  uploadMiddleware.single("file"),
   tryCatchMiddleware.Error(commentController.writeComment)
 );
 

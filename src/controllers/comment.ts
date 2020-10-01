@@ -8,9 +8,12 @@ export const writeComment = async (
   res: Response,
   next: NextFunction
 ) => {
+  const sound: any = req.file;
+  const content: string = req.body.content;
   const userEmail: string = req["decoded"].identity;
   const postId: string = req.params.id;
-  if (!Object.keys(req.body).length) throw new HttpError(400);
-  await commentService.write(req.body as ICommentWriteDTO, userEmail, postId);
+  if (sound)
+    await commentService.write(sound["key"], content, userEmail, postId);
+  else await commentService.write(null, content, userEmail, postId);
   res.status(201).end();
 };

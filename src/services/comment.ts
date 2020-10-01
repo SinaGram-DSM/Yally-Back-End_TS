@@ -9,12 +9,12 @@ const mkId = async (): Promise<string> => {
 };
 
 export const write = async (
-  commentWriteDTO: ICommentWriteDTO,
+  sound: string | null,
+  content: string,
   userEmail: string,
   postId: string
 ) => {
-  const { sound, content } = commentWriteDTO;
-  if (!sound || !content) throw new HttpError(400);
+  if (!sound && !content) throw new HttpError(400);
   const id = await mkId();
   await Comment.create({ id, sound, content, postId, userEmail });
 };
