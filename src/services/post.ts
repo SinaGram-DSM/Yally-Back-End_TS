@@ -87,7 +87,7 @@ export const showComment = async (postId: string): Promise<object> => {
 
 export const deletePost = async (postId: string) => {
   try {
-    await Post.destroy({ where: { postId } });
+    await Post.destroy({ where: { id: postId } });
   } catch (e) {
     throw new HttpError(404);
   }
