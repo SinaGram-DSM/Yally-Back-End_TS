@@ -1,6 +1,7 @@
 import { ICommentWriteDTO } from "../interfaces/IComment";
 import { Comment } from "../models/comment";
 import uuid4 from "uuid";
+import { HttpError } from "../exception/exception";
 
 const mkId = async (): Promise<string> => {
   const id = await uuid4().split("-");
@@ -13,6 +14,7 @@ export const write = async (
   postId: string
 ) => {
   const { sound, content } = commentWriteDTO;
+  if (!sound || !content) throw new HttpError(400);
   const id = await mkId();
   await Comment.create({ id, sound, content, postId, userEmail });
 };

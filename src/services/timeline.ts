@@ -13,31 +13,33 @@ export const getAll = async (
       order: [["createdAt", "DESC"]],
       where: { userEmail },
       attributes: ["id", "content", "sound", "img", "createdAt"],
+      offset: 5 * (page - 1),
+      limit: 5,
       include: [
         {
           model: User,
           attributes: ["email", "nickname", "img"],
         },
-        {
-          model: Comment,
-          attributes: ["id"],
-        },
-        {
-          model: Yally,
-          attributes: ["userEmail"],
-        },
+        // {
+        //   model: Comment,
+        //   attributes: ["id"],
+        // },
+        // {
+        //   model: Yally,
+        //   attributes: ["userEmail"],
+        // },
       ],
-      offset: 5 * (page - 1),
-      limit: 5,
     });
     for (let post of timeline) {
-      post["dataValues"].comment = post["dataValues"].comments.length;
-      post["dataValues"].yally = post["dataValues"].yallies.length;
+      const comments = await Comment.findAll({ where: { postId: post.id } });
+      const yallies = await Yally.findAll({ where: { postId: post.id } });
+      post["dataValues"].comment = comments.length;
+      post["dataValues"].yally = yallies.length;
       post["dataValues"].isYally = false;
       if (post["dataValues"].user.email === userEmail)
         post["dataValues"].isMine = true;
       else post["dataValues"].isMine = false;
-      for (let yally of post.yallies) {
+      for (let yally of yallies) {
         if (yally.userEmail === userEmail) post["dataValues"].isYally = true;
       }
     }
