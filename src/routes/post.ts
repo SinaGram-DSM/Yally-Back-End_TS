@@ -40,14 +40,14 @@ router.delete(
   tryCatchMiddleware.Error(commentController.deleteComment)
 );
 
-router.post(
-  "/yally",
+router.get(
+  "/yally/:id",
   authMiddleware,
   tryCatchMiddleware.Error(yallyController.addYally)
 );
 
 router.delete(
-  "/yally",
+  "/yally/:id",
   authMiddleware,
   tryCatchMiddleware.Error(yallyController.calcelYally)
 );

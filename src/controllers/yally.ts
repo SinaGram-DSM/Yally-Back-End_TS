@@ -6,8 +6,8 @@ export const addYally = async (
   res: Response,
   next: NextFunction
 ) => {
-  const postId = req.body.id;
-  const userEmail = req["decoded"].identity;
+  const postId: string = req.params.id;
+  const userEmail: string = req["decoded"].identity;
   await yallyService.addOne(postId, userEmail);
   res.status(200).end();
 };
@@ -17,7 +17,7 @@ export const calcelYally = async (
   res: Response,
   next: NextFunction
 ) => {
-  const postId: string = req.body.id;
+  const postId: string = req.params.id;
   const userEmail: string = req["decoded"].identity;
   await yallyService.cancelOne(postId, userEmail);
   res.status(204).end();
