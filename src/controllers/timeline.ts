@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import { getAll } from "../services/timeline";
+import * as timelineService from "../services/timeline";
 
 export const getTimeline = async (
   req: Request,
@@ -8,6 +8,17 @@ export const getTimeline = async (
 ) => {
   const userEmail: string = req["decoded"].identity;
   const page: any = req.params.page;
-  const timeline = await getAll(userEmail, page);
+  const timeline = await timelineService.getAll(userEmail, page);
   res.status(200).json({ posts: timeline });
+};
+
+export const recommendFriends = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const userEmail: string = req["decoded"].identity;
+  const friends = await timelineService.recommend(userEmail);
+  console.log(friends);
+  res.status(200).json({ friends });
 };
