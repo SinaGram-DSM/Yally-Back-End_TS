@@ -9,16 +9,23 @@ export const writeOne = async (
   next: NextFunction
 ) => {
   const userEmail: string = req["decoded"].identity;
-  const img: any = req.file;
-  const sound = req.body.sound;
+  const img: any = req.files["img"];
+  const sound: any = req.files["sound"];
   if (!sound) throw new HttpError(400);
   if (img)
     await postService.writeOne(
       req.body as IPostWriteDTO,
+      sound["key"],
       img["key"],
       userEmail
     );
-  else await postService.writeOne(req.body as IPostWriteDTO, null, userEmail);
+  else
+    await postService.writeOne(
+      req.body as IPostWriteDTO,
+      sound["key"],
+      null,
+      userEmail
+    );
   res.status(201).end();
 };
 
@@ -60,11 +67,22 @@ export const updateOne = async (
   next: NextFunction
 ) => {
   const postId: string = req.params.id;
-  const img: any = req.file;
-  const sound: string = req.body.sound;
+  const img: any = req.files["img"];
+  const sound: string = req.files["sound"];
   if (!sound) throw new HttpError(400);
   if (img)
-    await postService.updatePost(req.body as IPostWriteDTO, img["key"], postId);
-  else await postService.updatePost(req.body as IPostWriteDTO, null, postId);
+    await postService.updatePost(
+      req.body as IPostWriteDTO,
+      sound["key"],
+      img["key"],
+      postId
+    );
+  else
+    await postService.updatePost(
+      req.body as IPostWriteDTO,
+      sound["key"],
+      null,
+      postId
+    );
   res.status(201).end();
 };
