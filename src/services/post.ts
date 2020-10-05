@@ -14,16 +14,15 @@ const mkId = async (): Promise<string> => {
 
 export const writeOne = async (
   postWriteDTO: IPostWriteDTO,
+  sound: string,
   img: string | null,
   userEmail: string
 ) => {
-  const { sound, content, hashtag } = postWriteDTO;
+  const { content, hashtag } = postWriteDTO;
   const id = await mkId();
   const post = await Post.create({ id, sound, content, img, userEmail });
-  if (hashtag) {
-    for (let hash of hashtag) {
-      await Hashtag.create({ content: hash, postId: post.id });
-    }
+  for (let hash of hashtag) {
+    await Hashtag.create({ content: hash, postId: post.id });
   }
 };
 
@@ -102,10 +101,11 @@ export const deletePost = async (postId: string) => {
 
 export const updatePost = async (
   postWriteDTO: IPostWriteDTO,
+  sound: string,
   img: string | null,
   postId: string
 ) => {
-  const { sound, content, hashtag } = postWriteDTO;
+  const { content, hashtag } = postWriteDTO;
   await Post.update({ sound, content, img }, { where: { id: postId } });
   await Hashtag.destroy({ where: { postId } });
   if (hashtag) {
