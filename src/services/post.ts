@@ -21,8 +21,10 @@ export const writeOne = async (
   const { content, hashtag } = postWriteDTO;
   const id = await mkId();
   const post = await Post.create({ id, sound, content, img, userEmail });
-  for (let hash of hashtag) {
-    await Hashtag.create({ content: hash, postId: post.id });
+  if (hashtag) {
+    for (let hash of hashtag) {
+      await Hashtag.create({ content: hash, postId: post.id });
+    }
   }
 };
 
