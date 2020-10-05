@@ -11,7 +11,10 @@ const router = Router();
 router.post(
   "/",
   authMiddleware,
-  uploadMiddleware.single("file"),
+  uploadMiddleware.fields([
+    { name: "img", maxCount: 1 },
+    { name: "sound", maxCount: 1 },
+  ]),
   tryCatchMiddleware.Error(postController.writeOne)
 );
 
@@ -61,7 +64,10 @@ router.delete(
 router.put(
   "/:id",
   authMiddleware,
-  uploadMiddleware.single("file"),
+  uploadMiddleware.fields([
+    { name: "img", maxCount: 1 },
+    { name: "sound", maxCount: 1 },
+  ]),
   tryCatchMiddleware.Error(postController.updateOne)
 );
 
