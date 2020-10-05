@@ -9,8 +9,8 @@ export const writeOne = async (
   next: NextFunction
 ) => {
   const userEmail: string = req["decoded"].identity;
-  const img: any = req.files["img"];
-  const sound: any = req.files["sound"];
+  const img: any = req.files["img"][0];
+  const sound: any = req.files["sound"][0];
   if (!sound) throw new HttpError(400);
   if (img)
     await postService.writeOne(
@@ -67,8 +67,8 @@ export const updateOne = async (
   next: NextFunction
 ) => {
   const postId: string = req.params.id;
-  const img: any = req.files["img"];
-  const sound: string = req.files["sound"];
+  const img: any = req.files["img"][0];
+  const sound: any = req.files["sound"][0];
   if (!sound) throw new HttpError(400);
   if (img)
     await postService.updatePost(
