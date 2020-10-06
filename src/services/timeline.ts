@@ -9,10 +9,15 @@ export const getAll = async (
   page: number
 ): Promise<object> => {
   try {
+    let userEmailArr: Array<string> = [userEmail];
+    const user: any = await User.findOne({ where: { userEmail } });
+    const listening = await user.getListenings();
+    listening.forEach((element) => {
+      userEmailArr.push(element.email);
+    });
     const timeline: any = await Post.findAll({
-      subQuery: false,
       order: [["createdAt", "DESC"]],
-      where: { userEmail },
+      where: { userEmail: { [Op.in]: userEmailArr } },
       attributes: ["id", "content", "sound", "img", "createdAt"],
       offset: 5 * (page - 1),
       limit: 5,
@@ -21,14 +26,6 @@ export const getAll = async (
           model: User,
           attributes: ["email", "nickname", "img"],
         },
-        // {
-        //   model: Comment,
-        //   attributes: ["id"],
-        // },
-        // {
-        //   model: Yally,
-        //   attributes: ["userEmail"],
-        // },
       ],
     });
     for (let post of timeline) {
