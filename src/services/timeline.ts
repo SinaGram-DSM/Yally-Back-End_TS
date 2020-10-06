@@ -10,7 +10,7 @@ export const getAll = async (
 ): Promise<object> => {
   try {
     let userEmailArr: Array<string> = [userEmail];
-    const user: any = await User.findOne({ where: { userEmail } });
+    const user: any = await User.findOne({ where: { email: userEmail } });
     const listening = await user.getListenings();
     listening.forEach((element) => {
       userEmailArr.push(element.email);
