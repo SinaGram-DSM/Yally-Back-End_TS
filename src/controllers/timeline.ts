@@ -19,6 +19,5 @@ export const recommendFriends = async (
 ) => {
   const userEmail: string = req["decoded"].identity;
   const friends = await timelineService.recommend(userEmail);
-  console.log(friends);
   res.status(200).json({ friends });
 };
