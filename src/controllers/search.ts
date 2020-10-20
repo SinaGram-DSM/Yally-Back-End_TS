@@ -6,9 +6,9 @@ export const searchPost = async (
   res: Response,
   next: NextFunction
 ) => {
-  const hashtag: string = req.params.hashtag;
+  const hashtag: any = req.query.hashtag;
   const userEmail: string = req["decoded"].identity;
-  const page: any = req.params.page;
+  const page: any = req.query.page;
   const posts = await searchService.getSearch(userEmail, page, hashtag);
   res.status(200).json({ posts });
 };

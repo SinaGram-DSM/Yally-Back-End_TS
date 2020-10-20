@@ -6,7 +6,7 @@ import * as controller from "../controllers/search";
 const router = Router();
 
 router.get(
-  "/post/:hashtag/:page",
+  "/post",
   authMiddleware,
   tryCatchMiddleware.Error(controller.searchPost)
 );
