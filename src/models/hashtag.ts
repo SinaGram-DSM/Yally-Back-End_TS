@@ -9,7 +9,7 @@ export class Hashtag extends Model {
 Hashtag.init(
   {
     content: {
-      type: Sequelize.STRING(20),
+      type: Sequelize.STRING(100),
       primaryKey: true,
     },
   },
