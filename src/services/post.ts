@@ -15,7 +15,7 @@ const mkId = async (): Promise<string> => {
 export const writeOne = async (
   postWriteDTO: IPostWriteDTO,
   sound: string,
-  img: string | null,
+  img: string,
   userEmail: string
 ) => {
   const { content, hashtag } = postWriteDTO;
@@ -106,7 +106,7 @@ export const deletePost = async (postId: string) => {
 export const updatePost = async (
   postWriteDTO: IPostWriteDTO,
   sound: string,
-  img: string | null,
+  img: string,
   postId: string
 ) => {
   const { content, hashtag } = postWriteDTO;
