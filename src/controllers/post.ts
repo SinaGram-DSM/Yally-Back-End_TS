@@ -23,7 +23,7 @@ export const writeOne = async (
     await postService.writeOne(
       req.body as IPostWriteDTO,
       sound["key"],
-      null,
+      "post.jpg",
       userEmail
     );
   res.status(201).end();
@@ -81,7 +81,7 @@ export const updateOne = async (
     await postService.updatePost(
       req.body as IPostWriteDTO,
       sound["key"],
-      null,
+      "post.jpg",
       postId
     );
   res.status(201).end();
