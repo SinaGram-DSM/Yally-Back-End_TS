@@ -23,6 +23,7 @@ Post.init(
     },
     img: {
       type: Sequelize.STRING(40),
+      defaultValue: "post.jpg"
     },
     sound: {
       type: Sequelize.STRING(40),
