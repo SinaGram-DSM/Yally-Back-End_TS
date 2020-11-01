@@ -17,4 +17,6 @@ router.get(
   tryCatchMiddleware.Error(controller.getTimeline)
 );
 
+router.get("/", authMiddleware, tryCatchMiddleware.Error(controller.showInfo));
+
 export default router;
