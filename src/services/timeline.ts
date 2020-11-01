@@ -83,7 +83,7 @@ export const getInfo = async (email: string): Promise<object> => {
   try {
     const user: any = User.findOne({
       where: { email },
-      attributes: ["nickname", "img"],
+      attributes: ["email", "nickname", "img"],
     });
     return user;
   } catch (e) {
