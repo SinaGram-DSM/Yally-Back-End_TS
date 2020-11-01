@@ -21,3 +21,13 @@ export const recommendFriends = async (
   const friends = await timelineService.recommend(userEmail);
   res.status(200).json({ friends });
 };
+
+export const showInfo = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const email = req["decoded"].identity;
+  const info = await timelineService.getInfo(email);
+  res.status(200).json({ info });
+};
