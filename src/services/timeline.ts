@@ -78,3 +78,15 @@ export const recommend = async (email: string): Promise<object> => {
     throw e;
   }
 };
+
+export const getInfo = async (email: string): Promise<object> => {
+  try {
+    const user: any = User.findOne({
+      where: { email },
+      attributes: ["nickname", "img"],
+    });
+    return user;
+  } catch (e) {
+    throw e;
+  }
+};
