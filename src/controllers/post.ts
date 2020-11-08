@@ -10,19 +10,19 @@ export const writeOne = async (
 ) => {
   const userEmail: string = req["decoded"].identity;
   const img: any = req.files["img"];
-  const sound: any = req.files["sound"][0];
+  const sound: any = req.files["sound"];
   if (!sound) throw new HttpError(400);
   if (img)
     await postService.writeOne(
       req.body as IPostWriteDTO,
-      sound["key"],
+      sound[0]["key"],
       img[0]["key"],
       userEmail
     );
   else
     await postService.writeOne(
       req.body as IPostWriteDTO,
-      sound["key"],
+      sound[0]["key"],
       "post.jpg",
       userEmail
     );
@@ -68,19 +68,19 @@ export const updateOne = async (
 ) => {
   const postId: string = req.params.id;
   const img: any = req.files["img"];
-  const sound: any = req.files["sound"][0];
+  const sound: any = req.files["sound"];
   if (!sound) throw new HttpError(400);
   if (img)
     await postService.updatePost(
       req.body as IPostWriteDTO,
-      sound["key"],
+      sound[0]["key"],
       img[0]["key"],
       postId
     );
   else
     await postService.updatePost(
       req.body as IPostWriteDTO,
-      sound["key"],
+      sound[0]["key"],
       "post.jpg",
       postId
     );
